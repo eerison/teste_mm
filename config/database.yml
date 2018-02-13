@@ -1,0 +1,6 @@
+database:
+  drive: mysql
+  host: localhost
+  dbname: public
+  user: root
+  password: 123456

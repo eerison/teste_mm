@@ -1,0 +1,25 @@
+{
+    "name": "eerison/agenda",
+    "description": "agenda",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Eerison\\Tests\\" : "tests/",
+            "Eerison\\Routing\\" : "routing/",
+            "Eerison\\Agenda\\": "src/"
+
+        }
+    },
+    "authors": [
+        {
+            "name": "Erison Silva",
+            "email": "erison.sdn@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/yaml": "^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.4.*"
+    }
+}

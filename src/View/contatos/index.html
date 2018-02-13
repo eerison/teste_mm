@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/angular-flash.min.css">
+</head>
+<body ng-app="myApp">
+
+<div class="container" ng-controller="ContatoController">
+
+    <div class="h2">Agenda de contatos!</div>
+
+    <flash-message
+            duration="5000"
+            show-close="true"
+    ></flash-message>
+
+    <div class="alert alert-info" ng-show="list.length == 0">Nenhum registro!</div>
+
+    <table class="table table-hover">
+
+        <thead>
+        <tr>
+            <th colspan="4"></th>
+            <th><a href="#" class="btn btn-success btn-sm" ng-hide="actions.new" ng-click="actions.new=true">Novo</a></th>
+        </tr>
+        </thead>
+
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>nome</th>
+            <th>telefone</th>
+            <th>endereço</th>
+            <th>acões</th>
+        </tr>
+
+        </thead>
+
+        <thead ng-show="actions.new">
+        <form ng-submit="add(newContato)">
+        <tr>
+            <th></th>
+            <th><input type="text" class="form-control" ng-model="newContato.name" ng-required="true"/></th>
+            <th><input type="text" class="form-control" ng-model="newContato.phone" mask='(99) 9?9999.9999' /></th>
+            <th><input type="text" class="form-control" ng-model="newContato.address"/></th>
+            <th>
+                <button type="submit" class="btn btn-sm btn-success">Salvar</button>
+                <button type="button" class="btn btn-sm" ng-click="actions.new=false">Cancelar</button>
+            </th>
+        </tr>
+        </form>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="contato in list">
+                    <td>
+                        {{contato.id}}
+                        <input type="hidden" ng-model="contato.id">
+                    </td>
+                    <td>
+                        <div ng-hide="actions.edit[$index]">{{contato.name}}</div>
+                        <div ng-show="actions.edit[$index]">
+                            <input type="text" class="form-control" ng-model="contato.name" ng-required="true">
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-hide="actions.edit[$index]">{{contato.phone}}</div>
+                        <div ng-show="actions.edit[$index]">
+                            <input type="text" class="form-control" ng-model="contato.phone" mask='(99) 9?9999.9999'>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-hide="actions.edit[$index]">{{contato.address}}</div>
+                        <div ng-show="actions.edit[$index]">
+                            <input type="text" class="form-control" ng-model="contato.address">
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-show="actions.edit[$index]">
+                            <button type="submit" class="btn btn-sm btn-success" ng-click="edit(contato)">Salvar</button>
+                            <button type="button" class="btn btn-sm" ng-click="actions.edit[$index]=false">Cancelar</button>
+                        </div>
+
+                        <div ng-hide="actions.edit[$index]">
+                            <a href="#" class="btn btn-primary btn-sm" ng-click="actions.edit[$index]=true">Editar</a>
+                            <a href="#" class="btn btn-danger btn-sm" ng-click="remove(contato)"> Remover</a>
+                        </div>
+
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="/public/js/angular.min.js"></script>
+<script src="/public/js/ngMask.min.js"></script>
+<script src="/public/js/angular-flash.min.js"></script>
+
+<script src="/public/js/app.js"></script>
+</body>
+</html>
